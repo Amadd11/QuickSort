@@ -121,5 +121,20 @@ namespace QuickSort
         {
             return n;
         }
+        static void Main(string[] args)
+        {
+            //declaring the object of the class
+            Program myList = new Program();
+            //Accept array elements
+            myList.read();
+            //Calling the sorting function
+            //first call to quick sort algorithm
+            myList.q_sort(0, myList.getSize() - 1);
+            //display sorted array
+            myList.display();
+            //to exit from the console
+            Console.WriteLine("\n\nPress Enter To Exit.");
+            Console.Read();
+        }
     }
 }
