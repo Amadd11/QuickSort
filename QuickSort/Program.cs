@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace QuickSort
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
-        {
-        }
+        //array of interger to hold values
+        private int[] arr = new int[20];
+        private int cmp_count = 0;
+        private int mov_count = 0;
     }
 }
