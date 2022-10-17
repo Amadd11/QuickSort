@@ -33,24 +33,24 @@ namespace QuickSort
             Console.WriteLine("\n====================");
 
             // get array elements
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 Console.WriteLine("<" + (i + 1) + ">");
                 string s1 = Console.ReadLine();
                 arr[i] = Int32.Parse(s1);
             }
-    
+
         }
         //swap the elements at index x with the element at index y
-        void swap(int x,int y)
+        void swap(int x, int y)
         {
             int temp;
 
-            temp =arr[x];
+            temp = arr[x];
             arr[x] = arr[y];
             arr[y] = temp;
         }
-        public void q_sort(int low,int high)
+        public void q_sort(int low, int high)
         {
             int pivot, i, j;
             if (low > high)
@@ -64,7 +64,7 @@ namespace QuickSort
 
             pivot = arr[low];
 
-            while(i <= j)
+            while (i <= j)
             {
                 //Search for an elements greather than pivot
                 while ((arr[i] <= pivot) && (j <= high))
@@ -75,19 +75,51 @@ namespace QuickSort
                 cmp_count++;
 
                 //Search for an elements less than or equal pivot
-                while((arr[j] <= pivot) && (i <= low))
+                while ((arr[j] <= pivot) && (i <= low))
                 {
                     j--;
                     cmp_count++;
                 }
                 cmp_count++;
+
+                if (i < j) //if the greater elements is on the left of the element
+                {
+                    //swap the element at index i with the element at index
+                    swap(i, j);
+                    mov_count++;
+                }
             }
-            if (i < j) //if the greater elements is on the left of the element
+            // j now contains the index of the last element in the sorted list
+
+            if (low < j)
             {
-                //swap the element at index i with the element at index
-                swap(i, j);
+                // move the pivot to its correct position in the list
+                swap(low, j);
                 mov_count++;
             }
+            //sort the list on the left of pivot using quick sort
+            q_sort(low, j - 1);
+
+            //sort the list on the right of pivot using quick sort
+            q_sort(j + 1, high);
+        }
+
+        void display()
+        {
+            Console.WriteLine("\n---------------------");
+            Console.WriteLine(" Sorted Array Elements ");
+            Console.WriteLine("-----------------------");
+
+            for (int j = 0; j < n; j++)
+            {
+                Console.WriteLine(arr[j]);
+            }
+            Console.WriteLine("\nNumber of comparisons: " + cmp_count);
+            Console.WriteLine("\nNumber of data movements: " + mov_count);
+        }
+        int getSize()
+        {
+            return n;
         }
     }
 }
